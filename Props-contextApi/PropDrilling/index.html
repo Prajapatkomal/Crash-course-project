@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prop-drilling</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> 
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+</head>
+<body>
+      <div id="root">Hello from DOM</div>
+</body>
+</html>
+<script type="text/babel">
+
+ function BottomMainRight({userName}){
+
+    return(
+        <>
+         
+             <h1> BottomMainRight Component -</h1>
+             <h2 style={{color:"red"}}>Hello, {userName}</h2>
+            
+        </>
+    )
+ }
+
+
+
+ function MainLeft({userName}){
+
+    return(
+        <>
+         <h1>MainLeft Component -</h1>
+         <BottomMainRight userName={userName}/>
+        </>
+    )
+ }
+
+
+
+
+ function Main({userName}){
+
+    return(
+        <>
+          <h1>Main Component -</h1>
+          <MainLeft userName={userName}/>
+        </>
+    )
+ }
+
+
+   function App(){
+    const [userName,setuserName] = React.useState("")
+      function handleChange(e){
+        setuserName(e.target.value)
+      }
+    return(
+      <>
+       <input type="text" value={userName} placeholder="type name here..." onChange={handleChange}/>
+        <Main userName={userName}/>
+      </>
+    )
+   }
+
+
+        const root = ReactDOM.createRoot(document.getElementById("root"))
+        root.render(<App/>)
+</script>
+
