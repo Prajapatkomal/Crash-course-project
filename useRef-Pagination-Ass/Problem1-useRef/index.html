@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>userRef and pagination</title>
+   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+     <div id="root">Hello from DOM</div>
+</body>
+</html>
+
+<script type="text/babel">
+
+
+
+
+
+
+function App(){
+   
+    const inputRef = React.useRef(null)
+    const [isfocus, setisfocus] = React.useState(false)
+
+ function focusInput(){
+    inputRef.current.focus()
+    inputRef.current.style.backgroundColor =  "lightpink"
+    setisfocus(true)
+   
+ }
+
+
+    return (
+        <>
+        <h1>Problem 1 : L0</h1>
+         <input type="text" ref={inputRef}/>
+         <button onClick={focusInput}>Click me</button>
+        {isfocus && <h2> inputBox is focused</h2>}
+        </>
+    )
+}
+ 
+   let root = ReactDOM.createRoot(document.getElementById("root"))
+   root.render(<App/>)
+</script>
