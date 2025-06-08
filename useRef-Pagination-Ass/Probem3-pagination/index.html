@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem-3 L2</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+       <div id="root">Hello from DOM</div>
+</body>
+</html>
+
+<script type="text/babel">
+
+function App(){
+
+    const [character, setCharacter] = React.useState([])
+     const [page, setPage] = React.useState(1)
+     const pageRef = React.useRef(page)
+     const totalPages = 10
+     
+
+
+     async function fetchCharacter(){
+       const res = await fetch(`https://rickandmortyapi.com/api/character?page=${page}`)
+       const data = await res.json()
+       setCharacter(data.results)
+       
+     }
+
+
+     React.useEffect(()=>{
+          fetchCharacter()
+          pageRef.current = page
+          console.log("stored value of current page in pageref:", pageRef.current)
+     },[page])
+
+    return (
+        <>
+        <h1>Problem 3 : L2</h1>
+        <div style={{display:"grid", gridTemplateColumns:"repeat(3,1fr)" }} >
+                 {character.map((el)=>{
+                    return(
+                        <div style={{ border:"1px solid" , textAlign:"center"}} key={el.id} >
+                        <p>{el.id}.  {el.name}</p>
+                        <p>status:{el.status}</p>
+                        <p>orgin name:{el.origin.name}</p>
+                        <p>origin url:<a href={el.origin.url}>{el.origin.url}</a></p>
+                        <img style={{width:"100%"}} src={el.image}/>
+                        </div>
+                    )
+                 })} 
+        </div>
+        {[...Array(totalPages)].map((el,i)=>{
+            const pageNum = i+1
+            return(
+              <button onClick={()=>setPage(pageNum)} key={pageNum}
+                style={{backgroundColor: page===pageNum ? "lightgreen": "white",
+                     fontWeight: page === pageNum ? "bold" : "normal",
+                      fontSize: page===pageNum ? "25px": "20px"
+                }}>
+               {pageNum}
+             </button>
+            )
+        })}
+         <div style={{display:"inline",  marginLeft:"50px"}}> 
+          <button onClick={()=>setPage(prev=>prev-1)} disabled={page==1}>Previous</button>
+          <button onClick={()=>setPage(prev=>prev+1)} disabled={page==20}>Next</button>
+         </div>
+        </>
+    )
+}
+ 
+
+
+const root = ReactDOM.createRoot(document.getElementById("root"))
+root.render(<App/>)
+</script>

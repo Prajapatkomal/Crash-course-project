@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Problem 2</title>
+   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+     <div id="root">Hello from DOM</div>
+</body>
+</html>
+
+<script type="text/babel">
+
+
+
+
+
+
+function App(){
+
+    const [todos, setTodos] = React.useState([])
+     const [page, setPage] = React.useState(1)
+    const limit= 10
+    const totalPages = 20
+
+     async function fetchtodos(){
+       const res = await fetch(`https://jsonplaceholder.typicode.com/todos?_page=${page}&_limit=${limit}`)
+       const data = await res.json()
+       setTodos(data)
+     }
+
+
+     React.useEffect(()=>{
+          fetchtodos()
+
+     },[page])
+
+    return (
+        <>
+        <h1>Problem 2 : L1</h1>
+        {[...Array(totalPages)].map((el,i)=>{
+            const pageNum = i+1
+            return (
+                  <button onClick={()=>setPage(pageNum)} key={pageNum}
+                    style={{backgroundColor:page===pageNum? "lightgreen": "white",
+                        fontSize:page===pageNum? "25px":"20px"
+                    }}>
+                    {pageNum}
+                   </button>
+            )
+        })}
+
+        <div style={{display:"inline", marginLeft:"40px"}}> 
+          <button onClick={()=>setPage(prev=>prev-1)} disabled={page==1}>Previous</button>
+          <button style={{marginLeft:"30px"}} onClick={()=>setPage(prev=>prev+1)} disabled={page==20}>Next</button>
+         </div>
+          {todos.map((todo)=>{
+            return(
+                <div key={todo.id} style={{border:"1px solid", paddingLeft:"10px", marginTop:"20px"}}>
+                 <p> Id:{todo.id} <span style={{color:"green", marginLeft:"5px"}}>title:{todo.title} </span> </p>
+                </div>
+            )
+          })}
+        </>
+    )
+}
+ 
+   let root = ReactDOM.createRoot(document.getElementById("root"))
+   root.render(<App/>)
+</script>
