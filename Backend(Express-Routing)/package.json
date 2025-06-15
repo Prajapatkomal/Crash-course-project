@@ -1,0 +1,20 @@
+{
+  "name": "backend(express-routing)",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:problem1": "nodemon Problem1/server.js",
+    "start:problem2": "nodemon Problem2/server.js",
+    "start:problem3": "nodemon Problem3/server.js",
+    "start:problem4": "nodemon Problem4/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
