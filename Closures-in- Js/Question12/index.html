@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <h1>Question12</h1>
+</body>
+</html>
+<script>
+
+// L0 - Data Privacy using Closures:-
+
+ function createCounter(){
+    let count = 0
+    return {
+       increment :()=>{
+       count+=1
+       return (count)
+    },
+     getCount:()=>{
+        return count
+    }
+    }
+
+ }
+
+
+
+ const counter = createCounter();
+
+console.log(counter.increment()); // Output: 1;
+
+console.log(counter.increment()); // Output: 2;
+
+console.log(counter.getCount()); // Output: 2;
+</script>

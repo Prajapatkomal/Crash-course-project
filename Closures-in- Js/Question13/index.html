@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <h1>Question13</h1>
+</body>
+</html>
+<script>
+
+
+// L1 - Encapsulating Bank Account using Closures:-
+
+    function createBankAccount(amt){
+    let balance = amt
+      return {
+        deposit:(deopsitAmt)=>{
+           return balance += deopsitAmt
+
+        },
+         withdraw:(withdrawAmt)=>{
+            return balance -= withdrawAmt
+        },
+         getBalance:()=>{
+             return `getbalance ${balance}`
+        }
+      }
+    }
+
+    const account = createBankAccount(100)
+    console.log(account.deposit(50)) // Output: 120
+     console.log(account.withdraw(30))
+       console.log(account.getBalance());
+</script>
+
+
+
+console.log(account.withdraw(30)); // Output: 120
+
