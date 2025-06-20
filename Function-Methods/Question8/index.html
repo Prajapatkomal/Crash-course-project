@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+      <h1>Question8</h1>
+      <h2>L1 - Using call() to Access Object Properties</h2>
+</body>
+</html>
+<script>
+    //Create a function personInfo that logs the name and age of a person. 
+    // Using the call() method, call the function with a specific 
+    // this context (an object with properties name and age).
+
+
+function personInfo(){
+    console.log(`${this.name} is ${this.age} years old.`)
+}
+
+let person1 = {
+    name : "Jinal",
+    age : 25
+}
+
+let person2 = {
+    name : "Komal",
+    age : 27
+}
+
+let person3 = {
+    name : "Pooja",
+    age : 22
+}
+
+
+personInfo.call(person1)
+personInfo.call(person2)
+personInfo.call(person3)
+
+</script>

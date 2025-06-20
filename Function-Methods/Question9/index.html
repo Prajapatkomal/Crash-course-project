@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+      <h1>Question9</h1>
+      <h2>L1: Deep vs Shallow copy</h2>
+</body>
+</html>
+<script>
+
+//Write a function deepClone(obj) that creates a deep copy of a
+//given object using JSON.stringify() and JSON.parse(). 
+// The function should ensure that modifying the cloned 
+// object does not affect the original object.
+
+// Example Input:
+
+// { name: "Alice", hobbies: ["reading", "traveling"] }
+
+// Example Output (After modifying the clone):
+
+//Original: { name: "Alice", hobbies: ["reading", "traveling"] }
+// Clone: { name: "Alice", hobbies: ["reading", "traveling", "coding"] }
+
+let  Original=  { name: "Alice", hobbies:["reading", "traveling"] }
+
+function deepClone(obj){
+   return JSON.parse(JSON.stringify(obj))
+}
+
+let Clone = deepClone(Original)
+
+Clone.hobbies.push("coding")
+
+console.log("Original:" ,Original)
+console.log("Clone:" ,Clone)
+
+
+
+
+
+</script>
