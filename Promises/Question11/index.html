@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Question11</h1>
+</body>
+</html>
+<script>
+
+    let count = 0
+          function timer(onComplete,duration){
+           const setIntervalId =  setInterval(()=>{
+                count+=1
+                 console.log("timer:",count)
+            },1000)
+            onComplete(duration,setIntervalId)
+          }
+
+          timer(onComplete,5000)
+        
+          function onComplete(duration,setIntervalId){
+            setTimeout(()=>{
+            console.log(`Timer of ${duration} ms finished`)
+            clearTimeout(setIntervalId)
+            },duration)
+          }
+    
+   
+
+
+</script>
