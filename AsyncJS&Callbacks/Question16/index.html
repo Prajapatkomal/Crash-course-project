@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Question16</h1>
+</body>
+</html>
+
+<script>
+
+// fetchUserData(callback):
+// Logs "Fetching user data..."
+// After 1s, calls callback with "User data received"
+// Inside callback, fetchUserPosts(callback):
+// Logs "Fetching user posts..."
+// After 1.5s, calls callback with "User posts received"
+// Finally log "All data loaded successfully!"
+
+
+function fetchUserData(callback){
+    console.log("Fetching user data...")
+    setTimeout(()=>{
+        console.log( "User data received")
+        callback()
+    },1000)
+}
+
+fetchUserData(fetchUserPosts)
+
+function fetchUserPosts(callback){
+      console.log("Fetching user posts...")
+      setTimeout(()=>{
+         console.log("User posts received")
+         console.log("All data loaded successfully!")
+      },1500)
+}
+
+</script>

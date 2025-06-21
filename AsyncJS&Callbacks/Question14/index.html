@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Question14
+    </h1>
+</body>
+</html>
+<script>
+
+//**** debug the code****
+
+// console.log("Begin"); 
+// setTimeout(() => { console.log("Timeout Task"); }, 0); 
+// Promise.resolve().then(() => { console.log("Promise Task"); }); 
+// console.log("End");
+    
+//The correct order should be:
+
+// 1. Begin
+// 2. End
+// 3. Promise Task
+// 4. Timeout Task
+
+
+console.log("Begin"); 
+setTimeout(() => { console.log("Timeout Task"); }, 0); 
+Promise.resolve().then(() => { console.log("Promise Task"); }); 
+console.log("End");
+
+// already follows the order
+
+</script>
