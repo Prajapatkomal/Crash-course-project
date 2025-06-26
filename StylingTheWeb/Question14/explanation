@@ -1,0 +1,4 @@
+  document about explanation of error :-
+  
+  in internal style the background-color "#f0f0" is incorrect.hex color should have 6 digits 
+  in inline style  color: #3333 is incorrect should be #333 shorthand for #333333
