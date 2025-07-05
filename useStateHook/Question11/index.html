@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+</head>
+<body>
+     <div id="root">Hello from DOM</div>
+</body>
+</html>
+<script type="text/babel">
+
+function App(){
+    const [todo, setTodo] = React.useState([])
+     const [newTask, setNewTask] = React.useState({task:"",status:false})
+
+    function addTask(){
+        if(newTask.task!==""){      //Ensure non-empty task
+            setTodo([...todo,newTask])
+        }
+     setNewTask({task:"",status:false})
+    }
+
+
+    function toggleStatus(ind){
+     const updateTask = todo.map((el,index)=>{
+        if(ind===index){
+          return ({...el,status:!el.status}) 
+        }
+        return el
+      })
+      setTodo(updateTask)
+
+    }
+
+
+    function deleteTask(ind){   // delete Task 
+      const updateTask = todo.filter((el,index)=>index !== ind)
+      setTodo(updateTask)
+    }
+
+
+    return(
+        <div style={{margin:"auto" , width:"30%"}}>
+            <h1 style={{textAlign:"center"}}>Todo App</h1>
+            <div style={{display:"flex" , gap:"10px"}} >
+           <input type="text" placeholder="Add New Task..." value={newTask.task} onChange={(e)=>setNewTask({...newTask,task:e.target.value})}/> <br/> 
+            <button onClick={addTask}>Add New Task</button>
+              </div>
+               <ul>
+
+                {todo.map((el,ind)=>(
+                   <li key={ind}>{el.task} <button onClick={()=>toggleStatus(ind)}>{el.status? "completed":"Undo"}</button> <button onClick={()=>deleteTask(ind)}>Delete</button></li>
+               ))}
+
+               
+                </ul>
+        </div>
+    )
+}
+
+let root =  ReactDOM.createRoot(document.getElementById("root"))
+root.render(<App/>)
+</script>

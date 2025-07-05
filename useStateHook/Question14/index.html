@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+</head>
+<body>
+     <div id="root">Hello from DOM</div>
+</body>
+</html>
+<script type="text/babel">
+
+function App(){
+    const [todo, setTodo] = React.useState(["Buy milk", "Study React"])
+     const [task, setTask] = React.useState("")
+
+    function addTask(){
+        if(task!==""){
+            setTodo([...todo,task])
+        }
+     setTask("")
+    }
+
+    function clearAll(){
+        setTodo([])
+    }
+
+
+    return(
+        <div style={{margin:"auto" , width:"30%"}}>
+            <h1 style={{textAlign:"center"}}>Todo App</h1>
+            <div style={{display:"flex" , gap:"10px"}} >
+           <input type="text" placeholder="Add New Task..." value={task} onChange={(e)=>setTask(e.target.value)}/> <br/> 
+            <button onClick={addTask}>Add New Task</button>
+              <button onClick={clearAll}>Clear All</button>
+              </div>
+               <ul>
+
+                {todo.length===0 ? <h2>No tasks available.</h2>:
+                    todo.map((el,ind)=>(
+                   <li key={ind}>{el}</li>
+               ))}
+
+               
+                </ul>
+        </div>
+    )
+}
+
+let root =  ReactDOM.createRoot(document.getElementById("root"))
+root.render(<App/>)
+</script>

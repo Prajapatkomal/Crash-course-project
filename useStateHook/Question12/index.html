@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+</head>
+<body>
+     <div id="root">Hello from DOM</div>
+</body>
+</html>
+<script type="text/babel">
+
+function App(){
+    const [task,setTask] = React.useState([])
+    const [newTask,setNewTask] = React.useState({title:"", status:false,priority:""})
+     const [filterdata,setFilterdata] = React.useState([])
+
+     const priorityOrder = { High: 1, Medium: 2, Low: 3 };
+  
+
+    function addTask(){
+     if(newTask.title !== "" && newTask.priority !== ""){
+        setTask([...task,{...newTask,id:Date.now()}])
+     }else{
+      alert("enter both task and pririty ")
+     }
+     setNewTask({title:"",priority:newTask.priority})
+    }
+ 
+
+    function toggleStatus(id){
+      const updatedTask=  task.map((el)=>{
+        if(id===el.id){
+            return ({...el,status: !el.status})
+        }
+         return el
+       })
+       setTask(updatedTask)
+
+
+      if(filterdata.length>0){
+       const updateFilter =  filterdata.map((el)=>{
+        if(id===el.id){
+            return ({...el,status: !el.status})
+        }
+         return el
+       })
+         setFilterdata(updatedFilter)
+      }
+
+    }
+
+    function deleteTask(id){
+      const updatedTask = task.filter((el)=>id!==el.id)
+          setTask(updatedTask)
+
+        if(filterdata.length>0){
+           const updatedFilter = filterdata.filter((el)=>id!==el.id)
+         setFilterdata(updatedFilter)
+        }
+    }
+
+
+    function handleChange(e){
+       const value= e.target.value
+       if(value===""){
+        setFilterdata([])
+       }else{
+           const  newfilterdata = task.filter((el)=>el.priority === value)
+            setFilterdata(newfilterdata)
+       }
+    
+    }
+
+    const tasksToShow = filterdata.length > 0 ? filterdata : task;
+
+    // Sort before rendering
+    const sortedTasks = [...tasksToShow].sort(
+        (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]
+    );
+
+
+
+
+    return(
+        <div style={{margin:"auto" , width:"30%"}}>
+            <h1>Advanced Task Manager</h1>
+            <input type="text" placeholder="type task here..." value={newTask.title} onChange={(e)=>setNewTask({...newTask,title:e.target.value})}/>
+            <select value={newTask.priority} onChange={(e)=>setNewTask({...newTask,priority:e.target.value})}>
+              <option value="">Priority</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+             <button onClick={addTask}>Add Task</button><br/><br/>
+             <lable for="filterCategory"> Filter by Category</lable>
+            <select  value={newTask.priority} onChange={handleChange}>
+                <option value="">All</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+             
+            <ol>
+            {sortedTasks.map((el)=>(
+               <li key={el.id}>{el.title}- <button onClick={()=>toggleStatus(el.id)}>{el.status?"Completed" : "Incomplete"} </button>  <button onClick={()=>deleteTask(el.id)}>Delete</button> -<span style={{color:"green"}}> {el.priority}</span></li>  
+            ))}
+            </ol>
+        </div>
+    )
+}
+
+let root =  ReactDOM.createRoot(document.getElementById("root"))
+root.render(<App/>)
+</script>

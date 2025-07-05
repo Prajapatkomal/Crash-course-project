@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+</head>
+<body>
+     <div id="root">Hello from DOM</div>
+</body>
+</html>
+<script type="text/babel">
+
+function App(){
+    const [count, setCount] = React.useState(0)
+
+
+    return(
+        <div style={{margin:"auto" , width:"20%"}}>
+        <h2 style={{color:"Red", textAligh:"center"}}>Counter App</h2>
+        <h1>count:{count}</h1>
+        <button onClick={()=>setCount(count+1)} >Increment</button>
+          <button onClick={()=>setCount(count-1)} disabled={count===0}>Decrement</button>
+            <button onClick={()=>setCount(0)}>Reset</button>
+        {count==10  && <h2 style={{color:"Green", fontWeight:"bold"}}>"Goal Reached!"</h2>}
+        </div>
+    )
+}
+
+let root =  ReactDOM.createRoot(document.getElementById("root"))
+root.render(<App/>)
+</script>

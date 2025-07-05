@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+</head>
+<body>
+     <div id="root">Hello from DOM</div>
+</body>
+</html>
+<script type="text/babel">
+
+function App(){
+   const  studentObj =[{id: 1, name:"Komal",status: true},
+        {id: 1, name:"Vikas",status: true},
+             {id: 1, name:"Rohit",status: false},
+                  {id: 1, name:"Neha",status: true},
+              {id: 1, name:"Rekha",status: false}         
+]
+
+
+    const [student, setStudent] = React.useState(studentObj)
+
+    function toggleAttendance(ind){
+      const updateData =  student.map((el,index)=>{
+      if(ind===index){
+         return ({...el, status:!el.status})
+      }
+      return el  
+    })
+        setStudent(updateData)  
+    }
+
+    return(
+        <div style={{margin:"auto" , width:"30%"}}>
+            <h1 style={{textAlign:"center"}}>Attendance Manager app </h1>
+           
+               <ol>
+                {student.map((el,ind)=>(
+                   <li key={ind}>
+                    <div style={{display:"flex", gap:"20px"}}>
+                    <p>{el.name} </p>
+                      <p style={{color:el.status?"Green":"red" }}>{el.status? "Present":"Absent"}</p>
+                      <button style={{height:"25px", marginTop:"10px"}} onClick={()=>toggleAttendance(ind)}>Toggle</button>
+                      </div>
+                    </li>
+               ))}
+
+               
+                </ol>
+        </div>
+    )
+}
+
+let root =  ReactDOM.createRoot(document.getElementById("root"))
+root.render(<App/>)
+</script>
