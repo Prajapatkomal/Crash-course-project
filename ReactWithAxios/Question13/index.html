@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> email form</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root">Hello from  DOM </div>
+</body>
+</html>
+<script type="text/babel">
+     
+ function App(){
+    const[emailArr,setEmailArr] = React.useState([])
+     const[email,setEmail] = React.useState("")
+
+    function handleSubmit(e){
+      e.preventDefault()
+      setEmailArr([...emailArr,email])
+      setEmail("")
+    }
+
+     const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+
+
+        return(
+            <>
+               <form onSubmit={handleSubmit}>
+                <label htmlFor="Email">Email:  </label>
+                  <input type="email" onChange={(e)=>{setEmail(e.target.value)}} value={email}/>
+                    <input type="submit"/>
+                </form><br/><br/>
+                   Email: {email && <p>{email}</p>}
+
+                {email && !isValidEmail(email)  && <p style={{color:"red"}}>Invalid email format</p>}
+
+               <h1>Email Address:</h1> {emailArr.map((email,ind)=><p key={ind}> {email}</p>)}
+               
+            </>
+        )
+     }
+
+ 
+
+  
+
+
+   const root =  ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App/>)
+  
+
+
+</script>

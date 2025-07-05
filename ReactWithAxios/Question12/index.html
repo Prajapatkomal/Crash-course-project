@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uncontrolled form</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root">Hello from  DOM </div>
+</body>
+</html>
+<script type="text/babel">
+     
+ function App(){
+    const inputRef = React.useRef("")
+  
+   
+
+    function handleSubmit(e){
+      e.preventDefault()
+    alert(inputRef.current.value)
+    inputRef.current.value=""
+    }
+
+
+
+        return(
+            <>
+               <form onSubmit={handleSubmit}>
+                <label htmlFor="Username">Username:  </label>
+                  <input type="text"  ref={inputRef}/>
+                    <input type="submit"/>
+                </form>
+                
+            </>
+        )
+     }
+
+ 
+
+  
+
+
+   const root =  ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App/>)
+  
+
+
+</script>
