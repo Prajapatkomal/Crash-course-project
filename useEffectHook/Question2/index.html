@@ -1,1 +1,62 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Quote Generator</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root">Hello from  DOM </div>
+</body>
+</html>
+<script type="text/babel">
+     
+ function App(){
+    const[data,setData] = React.useState([])
+   
+    async function fetchdata(){
+      const res = await fetch("https://jsonplaceholder.typicode.com/posts")
+      const data = await res.json()
+      setData(data)
+     
+    }
+
+    
+
+
+    React.useEffect(()=>{
+        const interval =setInterval(()=>{
+          fetchdata()
+          console.log("automatic")
+      },3000)
+
+      return () => clearInterval(intervalId);
+    },[])
+
+
+        return(
+            <>
+            <h1>Daily Quote Generator</h1>
+             <button onClick={fetchdata}>Get New Quote</button>    
+            {data.map((el,ind)=>(
+                <p key={ind}>{el.title}</p>
+             ))}
+            </>
+        )
+     }
+
+ 
+
+  
+
+
+   const root =  ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App/>)
+  
+
+
+</script>

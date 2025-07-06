@@ -3,4 +3,66 @@
  
 
    
-    
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root">Hello from  DOM </div>
+</body>
+</html>
+<script type="text/babel">
+     
+ function App(){
+   const [theme ,setTheme] = React.useState(false)
+     
+
+
+    return (
+        <>
+        <h1>Toggle Theme </h1>
+           <button style={{height:"40px",width:"60px", fontSize:"20px", fontWeight:"bold"}} onClick={()=>setTheme(!theme)}>{theme?"dark":"light"}</button><br/><br/>
+           <ThemeBoxOne theme={theme}/><br/>
+           <ThemeBoxTwo  theme={theme}/><br/>
+             <ThemeBoxThree  theme={theme}/>
+        </>
+    )
+     }
+
+     function ThemeBoxOne({theme}){
+        return(
+         <div style={{backgroundColor:theme?"white":"black",border:"1px solid",width:"400px", height:"200px"}}>
+               <h2 style={{color:theme?"black":"white",}}>Hello My Name is Komal</h2>
+            </div>
+        )  
+     }
+
+     function ThemeBoxTwo({theme}){
+        return(
+         <div style={{backgroundColor:theme?"lightgrey":"blue",border:"1px solid",width:"400px", height:"200px"}}>
+               <h2 style={{color:theme?"black":"white",}}>Hello My Name is Komal</h2>
+            </div>
+        )  
+     }
+
+     function ThemeBoxThree({theme}){
+        return(
+         <div style={{backgroundColor:theme?"pink":"indigo",border:"1px solid",width:"400px", height:"200px"}}>
+               <h2 style={{color:theme?"black":"white",}}>Hello My Name is Komal</h2>
+            </div>
+        )  
+     }
+
+
+   const root =  ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App/>)
+  
+
+
+</script>
